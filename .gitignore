@@ -1,0 +1,15 @@
+# Rust build cache
+src-tauri/target/
+
+# Node dependencies
+node_modules/
+
+# Environment secrets
+.env
+*.env
+
+# macOS system files
+.DS_Store
+
+# Profiler raw logs
+*.profraw

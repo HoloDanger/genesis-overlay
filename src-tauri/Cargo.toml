@@ -1,0 +1,24 @@
+[package]
+name = "genesis-overlay"
+version = "1.0.0"
+default-run = "genesis-overlay"
+description = "Genesis Sovereign Desktop AI Overlay"
+authors = ["The Operator"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "1.5" }
+
+[dependencies]
+tauri = { version = "1.5", features = [ "api-all", "macos-private-api", "system-tray", "custom-protocol" ] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sysinfo = "0.30"
+arboard = "3.4"
+objc = "0.2"
+reqwest = { version = "0.11", features = ["stream", "json"] }
+futures-util = "0.3"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

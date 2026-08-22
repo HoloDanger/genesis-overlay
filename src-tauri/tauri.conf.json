@@ -1,0 +1,49 @@
+{
+  "build": {
+    "distDir": "../src",
+    "devPath": "../src",
+    "withGlobalTauri": true,
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
+  "package": {
+    "productName": "GenesisOverlay",
+    "version": "1.0.0"
+  },
+  "tauri": {
+    "macOSPrivateApi": true,
+    "systemTray": {
+      "iconPath": "icons/tray-icon.png",
+      "iconAsTemplate": true
+    },
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "targets": ["nsis", "dmg", "app"],
+      "identifier": "com.genesis.overlay",
+      "icon": ["icons/icon.png", "icons/icon.ico"],
+      "externalBin": [
+        "binaries/genesis-formatter"
+      ]
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "title": "Genesis Overlay",
+        "width": 540,
+        "height": 520,
+        "center": true,
+        "resizable": false,
+        "fullscreen": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "visible": true
+      }
+    ]
+  }
+}

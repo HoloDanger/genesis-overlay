@@ -1,0 +1,61 @@
+#!/usr/bin/env python3.14
+import sys
+import json
+import re
+
+def clean_text(text):
+    # Collapse multiple spaces and newlines
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = re.sub(r'\n+', '\n', text)
+    # Mask PII: replace URLs with [URL] and Emails with [EMAIL] for privacy
+    text = re.sub(r'https?://\S+', '[URL]', text)
+    text = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', '[EMAIL]', text)
+    return text.strip()
+
+def count_tokens(text):
+    # Standard subword/word estimation: split by word boundary and estimate
+    words = re.findall(r'\w+|[^\w\s]', text, re.UNICODE)
+    # Emulate a simple subword multiplier (1.3 tokens per word/punctuation)
+    return int(len(words) * 1.3)
+
+def main():
+    for line in sys.stdin:
+        if not line.strip():
+            continue
+        try:
+            request = json.loads(line)
+            req_id = request.get("id")
+            method = request.get("method")
+            params = request.get("params", {})
+
+            if method == "format_text":
+                raw_text = params.get("text", "")
+                cleaned = clean_text(raw_text)
+                tokens = count_tokens(cleaned)
+                
+                response = {
+                    "jsonrpc": "2.0",
+                    "result": {
+                        "formatted": cleaned,
+                        "tokens": tokens
+                    },
+                    "id": req_id
+                }
+            else:
+                response = {
+                    "jsonrpc": "2.0",
+                    "error": {"code": -32601, "message": "Method not found"},
+                    "id": req_id
+                }
+        except Exception as e:
+            response = {
+                "jsonrpc": "2.0",
+                "error": {"code": -32700, "message": f"Parse error: {str(e)}"},
+                "id": None
+            }
+        
+        sys.stdout.write(json.dumps(response) + "\n")
+        sys.stdout.flush()
+
+if __name__ == "__main__":
+    main()

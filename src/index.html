@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genesis Overlay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ====================================================================== -->
+  <!-- GENESIS OVERLAY: GLASSMORPHIC SHELL & INTERFACE LAYOUT                 -->
+  <!-- ====================================================================== -->
+  <div class="overlay-container">
+    <!-- Native Window Drag Handle & Title Bar -->
+    <div class="drag-handle" data-tauri-drag-region>
+      <span class="title">GENESIS // OVERLAY</span>
+      <button class="close-btn" id="close-btn">&times;</button>
+    </div>
+    
+    <div class="metrics-grid">
+      <!-- Section 1: System Hardware CPU Utilization -->
+      <div class="metric-card">
+        <div class="metric-label">CPU UTILIZATION</div>
+        <div class="metric-value" id="cpu-val">0.0%</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" id="cpu-bar" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <!-- Section 2: System Hardware RAM Allocation -->
+      <div class="metric-card">
+        <div class="metric-label">RAM ALLOCATION</div>
+        <div class="metric-value" id="ram-val">0.00 / 0.00 GB</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" id="ram-bar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Section 3: Native OS Clipboard Interceptor & Sanitizer -->
+      <div class="metric-card clipboard-card">
+        <div class="metric-label">CLIPBOARD INTERCEPTOR</div>
+        <div class="clipboard-preview" id="clip-preview">Awaiting copy event...</div>
+        <div class="clipboard-meta" id="clip-meta">Word Count: 0</div>
+      </div>
+
+      <!-- Section 4: Command Ingress Input Area -->
+      <div class="metric-card input-card">
+        <div class="metric-label">COMMAND INGRESS</div>
+        <textarea id="command-input" class="command-input" placeholder="Type note..." autofocus autocomplete="off" rows="3"></textarea>
+      </div>
+
+      <!-- Section 5: Super-Sub Preset Action Toolbar -->
+      <div class="metric-card toolbar-card">
+        <div class="metric-label">SUPER-SUB ACTION TOOLBAR</div>
+        <div class="toolbar-buttons">
+          <button class="preset-btn" data-preset="summarize" title="Alt+1 / Alt+S">SUMMARIZE</button>
+          <button class="preset-btn" data-preset="rewrite" title="Alt+2 / Alt+R">REWRITE</button>
+          <button class="preset-btn" data-preset="proofread" title="Alt+3 / Alt+P">PROOFREAD</button>
+          <button class="preset-btn" data-preset="translate" title="Alt+4 / Alt+T">TRANSLATE</button>
+          <button class="preset-btn" data-preset="refactor" title="Alt+5 / Alt+C">REFACTOR</button>
+          <button class="preset-btn" data-preset="vault" title="Alt+6 / Alt+V">VAULT</button>
+        </div>
+      </div>
+          
+      <!-- Section 6: Local AI Stream Token Output Container -->
+      <div class="metric-card ai-card">
+        <div class="metric-label">COGNITIVE OUTPUT (DEEPSEEK-R1 / QWEN2.5)</div>
+        <div class="ai-response" id="ai-response">Awaiting query...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main ES Module Script -->
+  <script src="main.js" type="module"></script>
+</body>
+</html>
