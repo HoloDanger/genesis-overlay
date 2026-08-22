@@ -2,7 +2,7 @@
 
 [![Potato Standard](https://img.shields.io/badge/Potato_Standard-<35MB_RAM-emerald.svg)](#performance-benchmarks--os-kernel-audit)
 [![Nix Flake](https://img.shields.io/badge/Nix_Flake-Supported-blueviolet.svg)](#method-1-declarative-nix-environment-recommended)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **Lightweight Shell. Local Brain. Instant Utility.**
 
@@ -138,4 +138,4 @@ cargo tauri build
 
 ## License
 
-MIT License. Built as part of the **Genesis Academy v6.0 Curriculum**.
+[MIT License](LICENSE). Built as part of the **Genesis Academy v6.0 Curriculum**.
