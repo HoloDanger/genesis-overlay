@@ -1,7 +1,7 @@
 # Genesis Overlay: Sovereign Desktop AI (v1.0.0)
 
 [![Potato Standard](https://img.shields.io/badge/Potato_Standard-<35MB_RAM-emerald.svg)](#performance-benchmarks--os-kernel-audit)
-[![Nix Flake](https://img.shields.io/badge/Nix_Flake-Supported-blueviolet.svg)](#option-a-building-with-nix-declarative--reproducible)
+[![Nix Flake](https://img.shields.io/badge/Nix_Flake-Supported-blueviolet.svg)](#method-1-declarative-nix-environment-recommended)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 
 > **Lightweight Shell. Local Brain. Instant Utility.**
@@ -69,43 +69,70 @@ All metrics verified empirically via production release builds (`src-tauri/targe
 
 ---
 
-## Build & Installation
+## Developer Onboarding & Quick Start
 
-### Option A: Building with Nix (Declarative & Reproducible)
+### Step 1: Install Local AI Prerequisites
+`Genesis Overlay` connects to a local Ollama daemon for zero-latency, private LLM inference:
 
+1. Install and start Ollama from [ollama.com](https://ollama.com).
+2. Pull the default technical coding model:
+   ```bash
+   ollama pull qwen2.5-coder:7b
+   ```
+3. *(Optional)* Set Gemini API key for automatic cloud fallback if local Ollama lags ($>1.5\text{s}$):
+   ```bash
+   export GEMINI_API_KEY="your-gemini-api-key-here"
+   ```
+
+---
+
+### Step 2: Instant Execution (Pre-Built / Nix)
+
+* **Option A: Pre-Built Installers (Zero Terminal)**  
+  Download `.dmg` (macOS) or `GenesisOverlay_1.0.0_x64-setup.exe` (Windows) from [GitHub Releases](https://github.com/HoloDanger/genesis-overlay/releases).
+* **Option B: Single-Command Nix Run (Zero Clone)**  
+  ```bash
+  nix run github:HoloDanger/genesis-overlay
+  ```
+
+---
+
+### Step 3: Building from Source (Zero-Node Architecture)
+
+`Genesis Overlay` features a **100% Zero-Node / Zero-Bundler** architecture. Building from source requires zero `npm` dependencies.
+
+#### Method 1: Declarative Nix Environment (Recommended)
 ```bash
-# Launch directly without manual building
+git clone https://github.com/HoloDanger/genesis-overlay.git
+cd genesis-overlay
+
+# Launch locally inside repo
 nix run
 
-# Or enter devshell for manual development
+# Or enter isolated devshell with Rust & WebKit dependencies
 nix develop
 ```
 
-### Option B: Native Manual Build
-
+#### Method 2: Native Cargo Build (Pure Rust)
 ```bash
-# Install frontend dependencies
-npm install
+git clone https://github.com/HoloDanger/genesis-overlay.git
+cd genesis-overlay/src-tauri
 
-# Compile release binary
-npm run tauri build
-```
+# Run live development mode with hot reloading
+cargo tauri dev
 
-### Environment Variables (Optional)
-
-```bash
-# Optional: Enable cloud fallback when local Ollama is offline or takes >1.5s
-export GEMINI_API_KEY="your-gemini-api-key-here"
+# Compile standalone release binary
+cargo tauri build
 ```
 
 ---
 
-## Keyboard Controls
+### Step 4: Keyboard Controls & Usage
 
-* `Cmd+Shift+Space` (or `Ctrl+Shift+Space`): Toggle overlay focus.
+* `Cmd+Shift+Space` (or `Ctrl+Shift+Space`): Toggle overlay window focus.
 * `Esc`: Hide overlay window.
-* `Tab` / `Shift+Tab`: Traverse actions mouse-free.
-* `Cmd+S`: Save active buffer fragment to Local Vault.
+* `Tab` / `Shift+Tab`: Traverse prompt presets (`summarize`, `rewrite`, `refactor`).
+* `Cmd+S`: Save active text buffer to local JSON vault (`~/Library/Application Support/com.genesis.overlay/vault.json`).
 
 ---
 
